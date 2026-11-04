@@ -571,8 +571,9 @@ static const int kAcDefaultMusicIds[4] = {1, 2, 3, 300000000};
     for (NSString *directory in
          @[ [AppDelegate appAssetsDirectory], [AppDelegate appAppSupportDirectory] ]) {
         for (NSString *entryName in [fileManager contentsOfDirectoryAtPath:directory error:nil]) {
-            if (![entryName hasPrefix:prefix] || ![entryName hasSuffix:suffix]) {
-                continue;
+            if ((prefix.length > 0 && ![entryName hasPrefix:prefix]) ||
+    ![entryName hasSuffix:suffix]) {
+                continue; 
             }
             NSString *digits = [entryName
                 substringWithRange:NSMakeRange(prefix.length,
@@ -966,3 +967,4 @@ static const int kAcDefaultMusicIds[4] = {1, 2, 3, 300000000};
 }
 
 @end
+
